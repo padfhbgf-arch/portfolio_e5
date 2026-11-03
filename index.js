@@ -1,23 +1,4 @@
-	const http = require("node:http");
-
-	const host = process.env.HOST || "127.0.0.1";
-	const port = Number(process.env.PORT || 3000);
-	const esp32ApiUrl = process.env.ESP32_API_URL || "http://192.168.4.1";
-
-	function sendJson(response, statusCode, payload) {
-		response.writeHead(statusCode, { "content-type": "application/json; charset=utf-8" });
-		response.end(JSON.stringify(payload));
-	}
-
-	async function readJsonBody(request) {
-		const chunks = [];
-		let totalBytes = 0;
-
-		for await (const chunk of request) {
-			totalBytes += chunk.length;
-			if (totalBytes > 1024) {
-				const error = new Error("Request body is too large");
-				error.statusCode = 413;
+	co
 				throw error;
 			}
 			chunks.push(chunk);
